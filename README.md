@@ -106,6 +106,7 @@ This separation keeps the workflow portable across agents and resilient as the W
 
 - Every authoring workflow begins with the live `get_authoring_guide` response.
 - Existing apps are searched and understood before a new widget is considered.
+- When an official app satisfies a required capability, it is preferred over a non-official app; non-official apps remain available when no official app fits or the creator explicitly requests one.
 - Drafts are validated before any write.
 - Creates use idempotency keys; updates fetch the current resource and use its exact version.
 - Only resources owned by the authorized account and still unpublished can be edited.
