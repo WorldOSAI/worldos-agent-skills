@@ -98,8 +98,9 @@ Prefer a small, coherent state model over many decorative panels. A persistent f
 1. Call `search_apps` with focused queries for the capabilities in the design brief. Search results, not memory, determine valid slugs.
 2. Call `get_app_guide` for every app under consideration.
 3. Read its current defaults, installation contract, type, and exclusivity constraints.
-4. Select the smallest set that expresses the core loop and persistent state.
-5. Include at least one clear player-action surface.
+4. When an official app satisfies a required capability, prefer it over a non-official app. Use a non-official app when no official app fits or the user explicitly requests it; do not install an irrelevant official app merely because it is official.
+5. Select the smallest set that expresses the core loop and persistent state.
+6. Include at least one clear player-action surface.
 
 Match the action surface to the turn structure. Keep single-action input when one decision should resolve the turn. For strategy, operations, or management worlds where one turn represents a coordinated plan, prefer a player-input configuration that can queue several editable actions and execute them together. Use only modes documented by the selected app's live guide; do not invent configuration fields from memory.
 
