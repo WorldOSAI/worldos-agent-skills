@@ -83,7 +83,7 @@ Treat extraordinary declarations as attempts, not facts. For difficult long-term
 - If the source includes a gameplay-relevant map or the adapted core loop depends on any of those geographic facts, use the `worldos-map-authoring` workflow and build or remix a validated map. This is a required adaptation branch, not optional polish.
 - Use no map only when geography is genuinely decorative or interchangeable. State that conclusion explicitly in the preflight and handoff.
 - Use a new region map only when lawful geometry, coherent ownership, and stable references can pass validation.
-- Use remix when the live contract protects a source map or requires remixing, including current tile-map restrictions.
+- Choose new authoring or remix according to source availability, the user’s intent, and the current region-map or tile-map app contract.
 - Treat Pax geometry and imagery as reference material unless reuse is covered by the user-presumed authorization or another valid basis recorded in provenance. A concrete source restriction or asset instability may block copying source pixels, but does not justify an arbitrary low-detail map. Create a faithful original or lawfully sourced replacement that preserves geographic extent, major landmasses, meaningful regions, factions, and topology.
 - Do not omit a major landmass or source faction, or reduce the source region count by more than 20 percent, without the user's explicit approval of that exact tradeoff. Address payload pressure through bounded map patches, topology-aware path simplification, and reduced decorative detail before removing playable geography.
 - Compare source and candidate maps side by side at overview and local zoom. A structurally valid map is not complete until the user-visible geography and visual hierarchy pass this fidelity review.
@@ -91,7 +91,7 @@ Treat extraordinary declarations as attempts, not facts. For difficult long-term
 
 For any region map, use the `worldos-map-authoring` workflow when available. Keep territorial owners as factions; represent villages, clans, organizations, and points of interest as characters or markers when they are not sovereign territory.
 
-When a lawful stable cover file is available and the live guide exposes cover upload, use `create_world_cover_upload`, upload the raw JPEG, PNG, or WebP to the signed URL, call `complete_world_cover_upload` with the exact current world version, and re-fetch the draft to verify `config.coverImage`. Do not claim an asset is attached before completion succeeds. Report avatars or backgrounds that still lack an equivalent supported upload path.
+When a lawful stable cover file is available and the live guide exposes cover upload, use `create_world_cover_upload`, upload the raw JPEG, PNG, WebP, GIF, MP4, or WebM file to the signed URL, call `complete_world_cover_upload` with the exact current world version, and re-fetch the draft to verify `config.coverImage`. Do not claim an asset is attached before completion succeeds. Report avatars or backgrounds that still lack an equivalent supported upload path.
 
 When the live guide exposes a target-bound world-asset upload, use it for lawful character avatars, faction flags, map backgrounds, and installed-app backgrounds. Match the same target during completion, pass the exact current world version, re-fetch after attachment, and record provenance or attribution where the destination schema supports it.
 
@@ -109,7 +109,7 @@ For a new draft, use a stable idempotency key tied to the Pax source version and
 
 For an update, call `get_owned_world`, preserve the complete latest draft, change only intended fields, validate the full candidate, and call `update_world_draft` with the exact current `updatedAt`. Re-fetch after success. On a version conflict, fetch, reapply, and revalidate instead of overwriting concurrent work.
 
-Do not edit a published resource or one owned by another account. Do not delete, transfer, or publish resources. Do not mutate, repair, rewind, rename, or delete saves.
+Do not edit a resource owned by another account or mutate an immutable live release directly. An owned published world may be changed through its working draft and a later explicit release. Do not delete, transfer, or publish resources in this adaptation workflow. Do not mutate, repair, rewind, rename, or delete saves.
 
 ## Review the adaptation
 

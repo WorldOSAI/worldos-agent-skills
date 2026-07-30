@@ -6,7 +6,7 @@ Use this checklist before creating or updating a world.
 
 - [ ] The user explicitly authorized the intended write.
 - [ ] The live authoring guide was read successfully.
-- [ ] The target is owned by the authorized account and remains unpublished.
+- [ ] The target is owned by the authorized account; edits to a published world are accumulating in its working draft rather than mutating a live release.
 - [ ] An update is based on the complete latest draft and exact `updatedAt`.
 - [ ] A create uses a stable idempotency key; identical retries reuse it.
 - [ ] External sources have structured URL, version, retrieval, hash, license, and notes when the live contract supports provenance.
@@ -70,15 +70,15 @@ Use this checklist before creating or updating a world.
 - [ ] Every uploaded cover or world asset completed against the intended target and exact world version, then appeared in the re-fetched draft.
 - [ ] The temporary playtest was deleted after review; real saves were never changed.
 - [ ] If no runtime preview or isolated/fresh-save playtest was possible, the handoff calls the result a structurally validated draft, labels runtime preview or playtesting as unverified, and does not call the Simulation finished.
-- [ ] Unless the explicit publishing workflow below succeeded, the handoff says the world is unpublished and requires human review.
+- [ ] Unless the explicit publishing workflow below succeeded, the handoff says the current working changes are unpublished; it distinguishes an existing live release from the new working draft when applicable.
 
 ## Publishing only
 
 Use this section only when the user explicitly requested publication.
 
-- [ ] The exact target world and public visibility were explicitly confirmed by the user.
-- [ ] A stable HTTPS cover is attached; signed-upload completion succeeded when a cover was uploaded.
-- [ ] `validate_world_for_publish` returned `ready: true` with reviewer permission.
+- [ ] The exact target world and intended release visibility were explicitly confirmed by the user.
+- [ ] If a cover was requested, signed-upload completion succeeded and the stable HTTPS URL appears in the draft; a missing optional cover warning was discussed rather than converted into a blocker.
+- [ ] `validate_world_for_publish` returned `ready: true` under the same ownership, moderation, subscription, and content rules as the editor.
 - [ ] The publish call uses the exact latest `updatedAt` and required literal confirmation.
-- [ ] The user was told that published worlds can no longer be edited through MCP.
+- [ ] The user was told that publication creates an immutable release, the owned world remains editable through a new working draft, and existing saves stay pinned until the player accepts an update.
 - [ ] The handoff reports publication only from a successful `publish_world` result and includes the public URL.

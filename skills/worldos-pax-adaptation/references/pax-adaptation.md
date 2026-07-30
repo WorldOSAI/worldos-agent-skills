@@ -197,7 +197,7 @@ For a region map:
 - maintain one stable player marker and move it after credible travel;
 - use lawful geometry and stable public assets with attribution when required.
 
-Treat Pax geometry and imagery as reference material unless reuse is lawful and passes live WorldOS validation. Follow the live contract for region-map creation and tile-map remix restrictions.
+Treat Pax geometry and imagery as reference material unless reuse is lawful and passes live WorldOS validation. Author or remix region maps and tile maps through their current live app contracts.
 
 ## Adaptation acceptance checklist
 
