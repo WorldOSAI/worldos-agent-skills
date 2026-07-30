@@ -36,6 +36,7 @@ The skill reads the live WorldOS authoring contract, discovers suitable apps, dr
 ## What you can build
 
 - Original role-playing, strategy, social, historical, educational, and narrative Simulations.
+- Alternate-history and grand-strategy Simulations like [Pax Historia](https://worldos.cc/pax-historia), where players lead nations, negotiate, wage war, and reshape history on living maps.
 - Remixable worlds with characters, chats, stats, inventory, quests, time, social feeds, calendars, email, maps, and other WorldOS apps.
 - Region maps with coherent geometry, factions, territorial ownership, labels, and markers.
 - Private reusable widgets when the existing WorldOS app catalog does not fit.
