@@ -1,20 +1,20 @@
 ---
 name: worldos-map-authoring
-description: Author, inspect, validate, or update a WorldOS region map through the WorldOS MCP, including sourcing and processing lawful external geometry. Use when a Simulation needs geographic regions, factions, territorial ownership, country labels, markers, regional actions, an open geographic dataset, or a historical or strategic map; also use when reviewing an existing owned draft map.
+description: Author, remix, inspect, validate, or update a WorldOS region map or tile map through the WorldOS MCP, including sourcing and processing lawful external geometry. Use when a Simulation needs geographic regions, hex terrain, factions, territorial ownership, country labels, markers, map actions, an open geographic dataset, or a historical or strategic map; also use when reviewing an existing owned working-draft map.
 ---
 
 # WorldOS Map Authoring
 
-Build a readable and internally consistent region map as part of an unpublished WorldOS world draft. Do not modify a platform map implementation, database row, or repository asset directly.
+Build a readable and internally consistent map as part of an owned WorldOS working draft. Do not modify a platform map implementation, database row, or repository asset directly.
 
 ## Confirm the live map contract
 
-1. Call `get_authoring_guide` and obey its current distinction between region maps and tile maps.
+1. Call `get_authoring_guide` and inspect the current region-map and tile-map contracts.
 2. Call `search_apps` for the map capability and read `get_app_guide` for the selected map app.
 3. For an existing owned draft, call `get_world_map` before editing and inspect its returned validation result.
 4. Treat live schemas and validation paths as authoritative over this skill.
 
-At the current contract, region maps may be authored from scratch with strict geometry and reference validation, while tile maps require remixing. If the live guide changes, follow it.
+At the current contract, region maps and tile maps may both be authored from scratch or remixed. Structural transport failures block a write; missing optional defaults, labels, colors, and runtime-tolerated cross-references are quality warnings. Preserve bounded unknown metadata when editing either map type.
 
 Read [references/map-quality.md](references/map-quality.md) before composing labels, markers, or a large set of regions. Read [references/map-sources-and-processing.md](references/map-sources-and-processing.md) before finding, downloading, or adapting external geometry.
 
@@ -40,11 +40,11 @@ A live map patch is not an unsafe partial write: it must merge into the current 
 
 ### Remix
 
-Preserve protected map config and linked characters exactly when remix validation requires it. Do not assume a base map can be recolored, relabeled, cropped, or given different owners until validation confirms those changes are allowed.
+Use a source whose `allowRemix` setting permits remixing or that the authorized creator owns. Fetch the complete source-derived config, preserve unknown fields that are outside the intended edit, and then recolor, relabel, crop, reassign ownership, or change linked characters as the user’s design requires.
 
 ### Tile map
 
-Follow the live remix restriction. Do not hand-author a new tile map merely because a runtime app guide describes its configuration.
+Author or remix a tile map through the selected app’s live schema. Use it when hex movement, terrain, range, or tile-level actions materially support the core loop; do not add one merely because the app exists.
 
 ## Establish one coordinate system
 

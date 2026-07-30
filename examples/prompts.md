@@ -30,9 +30,9 @@ Expected boundary: the map skill follows the live region-map contract and uses o
 
 > Upload this WebP image as the cover for my owned draft, validate the complete Simulation for publishing, and summarize every remaining error or warning. Do not publish it yet.
 
-> Publish my owned “The Last Embassy” draft now. Re-fetch its latest version, run the publish validation, and proceed only if the cover, moderation, permissions, and full world validation pass. I understand that it will become public and can no longer be edited through MCP.
+> Publish my owned “The Last Embassy” draft publicly now. Re-fetch its latest version, run the publish validation, and proceed only if moderation, ownership, subscription, and full world validation pass. I understand that this creates an immutable release; later edits will remain in a working draft until I publish another release.
 
-Expected boundary: cover upload is complete only after the signed upload is finalized. Publication requires the second prompt's explicit request, reviewer permission, clean validation, and exact latest version.
+Expected boundary: cover upload is complete only after the signed upload is finalized. Publication requires the second prompt's explicit request, owner permission, clean validation, and exact latest version. A missing cover may remain a discussed quality warning when the live product permits publication without one.
 
 ## Create a widget only when needed
 

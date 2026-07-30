@@ -41,9 +41,9 @@ The skill reads the live WorldOS authoring contract, discovers suitable apps, dr
 
 | Skill | Use it for |
 | --- | --- |
-| [`worldos-authoring`](skills/worldos-authoring/SKILL.md) | Design, validate, create, remix, update, cover, and explicitly reviewer-publish owned WorldOS Simulations. Start here. |
+| [`worldos-authoring`](skills/worldos-authoring/SKILL.md) | Design, validate, create, remix, update, cover, and explicitly publish owned WorldOS Simulations. Start here. |
 | [`worldos-pax-adaptation`](skills/worldos-pax-adaptation/SKILL.md) | Adapt versioned Pax Historia worlds into playable unpublished WorldOS drafts with explicit persistent state. |
-| [`worldos-map-authoring`](skills/worldos-map-authoring/SKILL.md) | Build and review region maps with coherent geometry, factions, ownership, labels, and markers. |
+| [`worldos-map-authoring`](skills/worldos-map-authoring/SKILL.md) | Build, remix, and review region maps or tile maps with coherent geometry, terrain, ownership, labels, and markers. |
 | [`worldos-widget-authoring`](skills/worldos-widget-authoring/SKILL.md) | Create and update private reusable WorldOS UGC widgets when no existing app fits. |
 | [`worldos-simulation-review`](skills/worldos-simulation-review/SKILL.md) | Inspect owned saves and turn history read-only to evaluate whether a Simulation behaves as designed. |
 
@@ -109,8 +109,8 @@ This separation keeps the workflow portable across agents and resilient as the W
 - When an official app satisfies a required capability, it is preferred over a non-official app; non-official apps remain available when no official app fits or the creator explicitly requests one.
 - Drafts are validated before any write.
 - Creates use idempotency keys; updates fetch the current resource and use its exact version.
-- Only resources owned by the authorized account and still unpublished can be edited.
-- Publishing is never implied. It requires an explicit request, clean publish validation, the latest world version, and an authorized reviewer account.
+- Only resources owned by the authorized account can be edited. Published worlds remain editable through a working draft and explicit next release; immutable releases are never mutated in place.
+- Publishing is never implied. It requires an explicit request, clean publish validation, the latest world version, and the same ownership and product rules as the WorldOS editor.
 - Save and turn access is read-only.
 - Skills never bypass the MCP through Supabase, SQL, private APIs, or repository internals.
 
