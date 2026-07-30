@@ -6,7 +6,11 @@
 
 Create living, playable AI worlds with Codex, Claude Code, Cursor, GitHub Copilot, and other skills-compatible agents.
 
-This repository provides portable [Agent Skills](https://agentskills.io/) for designing, mapping, extending, and reviewing [WorldOS](https://worldos.cc) Simulations through the public WorldOS Model Context Protocol (MCP) server. The skills add reliable world-authoring workflows while the MCP remains the capability and security boundary.
+[WorldOS](https://worldos.cc/) is an AI world simulation platform and no-code world builder powered by Civilization 1, a world model for human behavior and social simulation. Each WorldOS world is a persistent, interactive Simulation where characters, conversations, social feeds, maps, economies, time, and other apps evolve together—and where players can act freely, publish their creations, and remix community worlds.
+
+This open-source repository provides portable [Agent Skills](https://agentskills.io/) for designing, mapping, extending, publishing, and reviewing WorldOS Simulations through the public [WorldOS Model Context Protocol (MCP)](https://worldos.cc/docs/mcp). The skills add reliable world-authoring workflows while the MCP remains the capability and security boundary.
+
+[Explore AI-simulated worlds](https://worldos.cc/worlds) · [Create an AI world](https://worldos.cc/worlds/create) · [Browse the WorldOS App Market](https://worldos.cc/apps) · [Read the WorldOS MCP documentation](https://worldos.cc/docs/mcp)
 
 ## Install in 30 seconds
 
