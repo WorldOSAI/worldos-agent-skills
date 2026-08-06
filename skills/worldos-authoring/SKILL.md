@@ -45,6 +45,17 @@ Compose the draft manually when fidelity and deliberate mechanics matter. Use `s
 
 If the version is stale, fetch the latest draft, reapply the intended change, revalidate, and submit with the new version. Never overwrite concurrent changes blindly.
 
+### Update a world's default layout
+
+Default desktop and mobile window layouts are live presentation metadata, not versioned Simulation content. Change them only when the user explicitly asks to arrange or update the world's default layout.
+
+1. Call `get_world_layout` for the owned world and retain its exact layout `updatedAt`.
+2. Preserve the other platform's defaults when changing only desktop or mobile layout.
+3. Call `update_world_layout` with the exact `updatedAt` and only `windows`, `windowsRef`, or `mobileLayout` fields accepted by the live schema.
+4. Fetch the layout again and verify the intended values.
+
+Do not put `windows`, `windowsRef`, or `mobileLayout` in `create_world_draft`, `update_world_draft`, or `patch_world_draft`. Layout updates take effect without `publish_world` and do not authorize publication. Player-saved personal layouts continue to override the world default. On a layout-version conflict, fetch the latest layout, reapply the requested arrangement, and retry instead of overwriting concurrent work.
+
 ### Upload a world cover
 
 1. Fetch the owned draft and retain its exact `updatedAt`.
@@ -192,6 +203,7 @@ Report:
 - installed apps and which persistent facts each owns;
 - the opening action available to the player;
 - validation warnings that remain relevant;
+- whether an explicitly requested live default-layout change was applied and verified;
 - isolated playtest actions run, player-visible surfaces changed, any unresolved defects, and checks that remain unverified;
 - assets or copy that need human review;
 - any unsupported request that was intentionally left undone.
@@ -200,7 +212,7 @@ Never say the current working changes were published unless `publish_world` succ
 
 ## Hard boundaries
 
-- Do not mutate an immutable live release directly or edit resources owned by another account. Edit an owned published world only through its working draft and explicit next-release workflow.
+- Do not mutate immutable Simulation content directly or edit resources owned by another account. Edit an owned published world's content only through its working draft and explicit next-release workflow; the dedicated live-layout tools are limited to presentation metadata.
 - Do not delete, transfer, unpublish, or publish without the explicit owner workflow above.
 - Do not mutate, repair, rewind, rename, or delete real saves. Use only live isolated-playtest tools for temporary authoring sessions.
 - Do not create built-in apps or modify shared/published apps.
