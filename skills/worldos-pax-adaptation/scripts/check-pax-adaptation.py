@@ -31,10 +31,12 @@ def text(value: Any) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Require complete source decisions and enforce lean WorldOS prompt budgets.")
     parser.add_argument("audit", type=Path, help="Completed coverage worksheet")
-    parser.add_argument("--draft", type=Path, required=True, help="Candidate WorldOS draft JSON")
+    world_input = parser.add_mutually_exclusive_group(required=True)
+    world_input.add_argument("--world", type=Path, help="Candidate WorldOS world JSON")
+    world_input.add_argument("--draft", dest="legacy_draft", type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args()
     audit = load_json(args.audit)
-    draft = load_json(args.draft)
+    world = load_json(args.world or args.legacy_draft)
     errors: list[str] = []
     warnings: list[str] = []
 
@@ -64,11 +66,11 @@ def main() -> None:
         elif disposition == "verify" and not text(row.get("verification")).strip():
             errors.append(f"{path}: verify requires verification plan or result")
 
-    if not isinstance(draft, dict):
-        errors.append("draft must be an object")
-        draft = {}
-    config = draft.get("config") if isinstance(draft.get("config"), dict) else {}
-    apps = draft.get("apps") if isinstance(draft.get("apps"), list) else []
+    if not isinstance(world, dict):
+        errors.append("world must be an object")
+        world = {}
+    config = world.get("config") if isinstance(world.get("config"), dict) else {}
+    apps = world.get("apps") if isinstance(world.get("apps"), list) else []
     system_prompt = text(config.get("systemPrompt"))
     soft_rules = text(config.get("softRulesPrompt"))
     intro = text(config.get("introMd"))
@@ -101,11 +103,11 @@ def main() -> None:
         errors.append(f"introMd has {len(intro)} characters; target <= 8,000")
     if opening_chars > 8_000:
         errors.append(f"Story opening has {opening_chars} characters; target <= 8,000")
-    draft_bytes = len(json.dumps(draft, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
-    if draft_bytes > 3_500_000:
-        errors.append(f"draft is {draft_bytes} bytes; keep below 3,500,000 before MCP validation")
-    elif draft_bytes > 3_000_000:
-        warnings.append(f"draft is {draft_bytes} bytes and is close to the authoring limit")
+    world_bytes = len(json.dumps(world, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+    if world_bytes > 3_500_000:
+        errors.append(f"world is {world_bytes} bytes; keep below 3,500,000 before MCP validation")
+    elif world_bytes > 3_000_000:
+        warnings.append(f"world is {world_bytes} bytes and is close to the authoring limit")
 
     prompt_sources = [("systemPrompt", system_prompt), ("softRulesPrompt", soft_rules), *[(f"apps.{slug}.prompt", prompt) for slug, prompt in app_prompts]]
     paragraphs: dict[str, list[str]] = {}
@@ -129,7 +131,7 @@ def main() -> None:
             "estimatedInjectedChars": injected,
             "introChars": len(intro),
             "storyOpeningChars": opening_chars,
-            "draftBytes": draft_bytes,
+            "worldBytes": world_bytes,
         },
         "errors": errors,
         "warnings": warnings,
