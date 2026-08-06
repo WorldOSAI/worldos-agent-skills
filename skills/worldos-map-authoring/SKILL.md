@@ -1,17 +1,17 @@
 ---
 name: worldos-map-authoring
-description: Author, remix, inspect, validate, or update a WorldOS region map or tile map through the WorldOS MCP, including sourcing and processing lawful external geometry. Use when a Simulation needs geographic regions, hex terrain, factions, territorial ownership, country labels, markers, map actions, an open geographic dataset, or a historical or strategic map; also use when reviewing an existing owned working-draft map.
+description: Author, remix, inspect, validate, or directly update a WorldOS region map or tile map through the WorldOS MCP, including sourcing and processing lawful external geometry. Use when a Simulation needs geographic regions, hex terrain, factions, territorial ownership, country labels, markers, map actions, an open geographic dataset, or a historical or strategic map; also use when reviewing an existing owned map.
 ---
 
 # WorldOS Map Authoring
 
-Build a readable and internally consistent map as part of an owned WorldOS working draft. Do not modify a platform map implementation, database row, or repository asset directly.
+Build a readable and internally consistent map in an owned WorldOS Simulation through its public MCP tools. Do not modify a platform map implementation, database row, or repository asset directly.
 
 ## Confirm the live map contract
 
 1. Call `get_authoring_guide` and inspect the current region-map and tile-map contracts.
 2. Call `search_apps` for the map capability and read `get_app_guide` for the selected map app.
-3. For an existing owned draft, call `get_world_map` before editing and inspect its returned validation result.
+3. For an existing owned world, call `get_world_map` before editing and inspect its returned validation result.
 4. Treat live schemas and validation paths as authoritative over this skill.
 
 At the current contract, region maps and tile maps may both be authored from scratch or remixed. Structural transport failures block a write; missing optional defaults, labels, colors, and runtime-tolerated cross-references are quality warnings. Preserve bounded unknown metadata when editing either map type.
@@ -33,7 +33,7 @@ Compose a `map` installation config with a coherent coordinate system and stable
 1. Fetch the complete map with `get_world_map`.
 2. Fetch the complete world with `get_owned_world`.
 3. Preserve every untouched map and world field.
-4. For a bounded change or large import, use `patch_world_map` when the live contract exposes it, in batches no larger than the live schema permits. Otherwise replace the map installation config inside the complete candidate world draft.
+4. For a bounded change or large import, use `patch_world_map` when the live contract exposes it, in batches no larger than the live schema permits. Otherwise replace the map installation config inside the complete candidate world.
 5. Validate the complete merged map and world, update with the exact world version, and re-fetch after every successful batch.
 
 A live map patch is not an unsafe partial write: it must merge into the current map, validate the complete result, and save atomically. Create one valid initial map before applying batches. Never leave unresolved owners or references for a later batch.
@@ -107,7 +107,7 @@ Use the source-discovery and download workflow in [references/map-sources-and-pr
 
 ## Validate in layers
 
-Before the full draft write:
+Before the complete world write:
 
 1. Check IDs for uniqueness.
 2. Check every owner, faction, character, region, label, and marker reference.
@@ -117,7 +117,7 @@ Before the full draft write:
 6. Check label density and positions.
 7. For adaptations, compare source and candidate maps side by side at overview and local zoom and verify every approved fidelity tradeoff.
 8. Check map-specific validation from `get_world_map` when available.
-9. Inspect payload size before a large write when the live tool exists, then call `validate_world_draft` on the complete world.
+9. Inspect payload size with `inspect_world_payload` before a large write, then call `validate_world` on the complete world.
 10. Repair every map error and reassess each warning.
 
 After a write, fetch the world and map again. Verify region, faction, action, and marker counts as well as the new world version and preview URL.

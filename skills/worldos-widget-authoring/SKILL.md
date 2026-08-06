@@ -110,7 +110,7 @@ On a stale version, refetch, reapply the intended change, revalidate, and submit
 
 ## Install into a world
 
-After creating a widget, install it only in a world owned by the authorized account. Put world-specific opening data and local rules in that world’s installation config. Revalidate the complete world draft after adding the widget.
+After creating a widget, install it only in a world owned by the authorized account. Put world-specific opening data and local rules in that world’s installation config. Revalidate the complete world after adding the widget.
 
 ## Handoff
 

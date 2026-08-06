@@ -45,11 +45,11 @@ After retrieval:
 5. Use `https://www.paxhistoria.co/api/presets/search` only for discovery and summary cross-checks. It is not a replacement for the versioned document. Use the public preset page for identity, visible version history, and visual review rather than DOM-based full extraction.
 6. If the document is unavailable, denied, malformed, or inconsistent, stop and request a user export or pasted source. Do not silently fall back to an unversioned page.
 
-Before validation or writing, run the coverage and content-budget gate against the candidate draft:
+Before validation or writing, run the coverage and content-budget gate against the candidate world payload:
 
 ```bash
 python3 scripts/check-pax-adaptation.py pax-version-<version-id>.coverage.json \
-  --draft worldos-draft.json
+  --world worldos-world.json
 ```
 
 Repair every coverage error. Distill copy that exceeds the reported budgets instead of moving the same lore between prompts. Warnings about near-limit payloads or duplicated long prompt paragraphs require an explicit review.
@@ -173,7 +173,7 @@ When an option claims to change a durable opening fact, make an option-coverage 
 
 ## Map adaptation
 
-Apply a mandatory map gate before assembling the draft:
+Apply a mandatory map gate before assembling the world payload:
 
 1. Record whether the Pax source contains a map or map-owned facts.
 2. Record whether location, movement, ownership, regional state, or regional action changes player decisions in the adapted core loop.
@@ -205,7 +205,7 @@ Treat Pax geometry and imagery as reference material unless reuse is lawful and 
 
 - [ ] The exact Pax source and version are recorded.
 - [ ] Preserve, rebuild, omit, and verify decisions are explicit.
-- [ ] The generated coverage worksheet has no undecided row and passes the bundled checker against the candidate draft.
+- [ ] The generated coverage worksheet has no undecided row and passes the bundled checker against the candidate world payload.
 - [ ] Prompt, opening, and total payload budgets pass without hiding source prose in another injected field.
 - [ ] The player fantasy, authority, opening decision, and core loop are clear.
 - [ ] The adaptation form comes from the source rather than a default RPG or strategy template.
@@ -247,18 +247,18 @@ Treat Pax geometry and imagery as reference material unless reuse is lawful and 
 
 ### Validation and handoff
 
-- [ ] The complete draft passes validation with every warning assessed.
+- [ ] The complete world passes validation with every warning assessed.
 - [ ] The exact source URL, version, retrieval time, hashes, and rights notes are stored in live structured provenance when supported.
 - [ ] Near-limit payloads were inspected before writing; large world or map sections used exact-version bounded patches when supported.
 - [ ] A create uses a stable source-versioned idempotency key.
-- [ ] An update uses the latest complete draft and exact version.
-- [ ] The post-write draft is re-fetched or summarized successfully.
+- [ ] An update uses the latest complete world and exact version.
+- [ ] The post-write world is re-fetched or summarized successfully.
 - [ ] The returned preview was inspected when read-only page access was available; raw templates and internal window IDs are not visible.
 - [ ] When exposed by the live contract, the isolated playtest completed at least five successful turn calls: ordinary action, quiet action, second quiet action with external pressure, ambitious failure/cost, and a persistence-confirming follow-up.
 - [ ] Applicable relationship and map checks used their real chat and map interaction surfaces, with additional turns when necessary.
 - [ ] Available player-visible assertions passed and the complete temporary turn history was inspected before deletion.
 - [ ] Expected consequences changed the correct player-visible surfaces and remained consistent in later turns.
 - [ ] The temporary playtest session was deleted after review.
-- [ ] Without a preview or isolated/fresh-save playtest, the handoff calls the result a structurally validated draft with runtime preview or playtesting still unverified, rather than finished.
+- [ ] Without a preview or isolated/fresh-save playtest, the handoff calls the result structurally validated with runtime preview or playtesting still unverified, rather than finished.
 - [ ] Any real-save review remains owner-scoped and read-only.
 - [ ] The handoff identifies remaining asset, copy, preview, and publishing review.

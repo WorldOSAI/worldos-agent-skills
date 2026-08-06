@@ -1,26 +1,26 @@
 ---
 name: worldos-pax-adaptation
-description: Adapt a versioned Pax Historia preset, world link, export, prompt, map, timeline, or character set into an unpublished WorldOS Simulation draft through the WorldOS MCP. Use when a user asks to import, port, recreate, or convert a Pax world while preserving its premise and Advisor intent and rebuilding prompt-only mechanics as app-owned persistent state.
+description: Adapt a versioned Pax Historia preset, world link, export, prompt, map, timeline, or character set into an unpublished WorldOS Simulation through the WorldOS MCP. Use when a user asks to import, port, recreate, or convert a Pax world while preserving its premise and Advisor intent and rebuilding prompt-only mechanics as app-owned persistent state.
 ---
 
 # WorldOS Pax Adaptation
 
-Turn a Pax Historia source into a playable WorldOS Simulation rather than a textual copy. Preserve the player fantasy and distinctive conflicts, then rebuild mechanics around WorldOS apps, explicit state ownership, active pacing, and reviewable unpublished drafts.
+Turn a Pax Historia source into a playable WorldOS Simulation rather than a textual copy. Preserve the player fantasy and distinctive conflicts, then rebuild mechanics around WorldOS apps, explicit state ownership, active pacing, and reviewable unpublished worlds.
 
 Use only public WorldOS MCP capabilities for WorldOS reads and writes. Do not fall back to Supabase, SQL, private APIs, platform source code, or WorldOS application-repository scripts. Ordinary read-only source access and the bundled Pax snapshot helper are allowed only for source acquisition.
 
 ## Start with the live contract
 
-1. Call `get_authoring_guide` before designing or editing a draft.
+1. Call `get_authoring_guide` before designing or editing a world.
 2. Treat the live guide, current tool schemas, and validation results as authoritative.
 3. Stop and request client reauthorization if the MCP is unavailable or unauthorized. Never request an access token in chat.
 4. Read [references/pax-adaptation.md](references/pax-adaptation.md) before composing the state model or opening.
 
-Read-only requests such as “review,” “audit,” “explain,” or “show me a proposal” do not authorize a write. Create or update a draft only when the user clearly asks to import, adapt, create, or modify it. Publishing always remains a human step in WorldOS.
+Read-only requests such as “review,” “audit,” “explain,” or “show me a proposal” do not authorize a write. Create or update a world only when the user clearly asks to import, adapt, create, or modify it. Publishing always remains a human step in WorldOS.
 
 ## Freeze and audit the source
 
-Record the exact Pax URL, preset identifier, version identifier, title, and source language. Treat an unversioned latest page as unstable. Follow the version-specific public snapshot workflow in [references/pax-adaptation.md](references/pax-adaptation.md) when the preset is publicly readable: prefer the exact Firestore document used by the Pax frontend over browser DOM extraction, pin the raw response, and record both raw and canonical JSON hashes. Run the bundled decoder to produce ordinary JSON plus a source-coverage worksheet before designing the WorldOS draft. Use Pax search only for discovery or summary cross-checks, not as the complete source.
+Record the exact Pax URL, preset identifier, version identifier, title, and source language. Treat an unversioned latest page as unstable. Follow the version-specific public snapshot workflow in [references/pax-adaptation.md](references/pax-adaptation.md) when the preset is publicly readable: prefer the exact Firestore document used by the Pax frontend over browser DOM extraction, pin the raw response, and record both raw and canonical JSON hashes. Run the bundled decoder to produce ordinary JSON plus a source-coverage worksheet before designing the WorldOS world. Use Pax search only for discovery or summary cross-checks, not as the complete source.
 
 Treat these public web endpoints as an undocumented frontend data layer, not a supported Pax developer API. Never add credentials, enumerate unrelated documents, or bypass an access denial. Public readability does not grant permission to republish protected prose, images, flags, or geometry. If the exact version cannot be read through ordinary read-only access, ask the user for an export or pasted content instead of guessing.
 
@@ -37,13 +37,13 @@ Classify source material before choosing apps:
 
 Give the user a concise preflight summary of what will be preserved, rebuilt, omitted, and left for manual review.
 Summarize and transform source prose; do not reproduce long Pax prompts or other source text verbatim.
-Complete every generated coverage row and run the bundled adaptation checker against the candidate draft. Treat missing source decisions, missing state owners, and exceeded prompt budgets as blockers rather than silently dropping source material or moving all prose into `systemPrompt`.
+Complete every generated coverage row and run the bundled adaptation checker against the candidate world. Treat missing source decisions, missing state owners, and exceeded prompt budgets as blockers rather than silently dropping source material or moving all prose into `systemPrompt`.
 
 ## Define the adaptation brief
 
 First choose the adaptation form from the source instead of assuming a customizable individual RPG. Pax presets may become a fixed-protagonist narrative, relationship ensemble, investigation, household or dynasty, organization or business simulation, faction or state strategy, management world, or open counterfactual sandbox. Preserve what the player controls and repeatedly decides. Do not add a background picker, inventory, quests, character chats, stats, or a map merely because another adaptation used them.
 
-Before assembling a draft, state:
+Before assembling the world payload, state:
 
 - the player-controlled person, group, institution, territory, or viewpoint and its authority scale;
 - the immediate opening pressure and first meaningful decision;
@@ -70,7 +70,7 @@ Prefer the smallest coherent set of existing apps. Include at least one clear pl
 
 Create an active opening that establishes the controlled viewpoint, current situation, pressure, stakes, and several distinct actions appropriate to the chosen interaction model. Player setup is optional. When it is needed, put fields in `config.initFields`, give every required field a useful default and clickable options, and use standard player and character template variables consistently in world copy and every app seed. Never invent `setupFields`.
 
-When setup options imply different affiliations, locations, eras, equipment, conditions, authority, or objectives, audit every option against the seeded Story, apps, and characters. If the live contract cannot express those different initial facts, narrow the options, choose one focused opening, or create separate drafts. Do not present a consequential choice that changes only prose while shared state contradicts it.
+When setup options imply different affiliations, locations, eras, equipment, conditions, authority, or objectives, audit every option against the seeded Story, apps, and characters. If the live contract cannot express those different initial facts, narrow the options, choose one focused opening, or create separate worlds. Do not present a consequential choice that changes only prose while shared state contradicts it.
 
 Maintain one active main arc tied to recent choices. After no more than two quiet turns, introduce a causally grounded message, visitor, summons, discovery, attack, deadline, or other external pressure. Escalate, transform, or resolve an ordinary opportunity within a few meaningful turns.
 
@@ -91,7 +91,7 @@ Treat extraordinary declarations as attempts, not facts. For difficult long-term
 
 For any region map, use the `worldos-map-authoring` workflow when available. Keep territorial owners as factions; represent villages, clans, organizations, and points of interest as characters or markers when they are not sovereign territory.
 
-When a lawful stable cover file is available and the live guide exposes cover upload, use `create_world_cover_upload`, upload the raw JPEG, PNG, WebP, GIF, MP4, or WebM file to the signed URL, call `complete_world_cover_upload` with the exact current world version, and re-fetch the draft to verify `config.coverImage`. Do not claim an asset is attached before completion succeeds. Report avatars or backgrounds that still lack an equivalent supported upload path.
+When a lawful stable cover file is available and the live guide exposes cover upload, use `create_world_cover_upload`, upload the raw JPEG, PNG, WebP, GIF, MP4, or WebM file to the signed URL, call `complete_world_cover_upload` with the exact current world version, and re-fetch the world to verify `config.coverImage`. Do not claim an asset is attached before completion succeeds. Report avatars or backgrounds that still lack an equivalent supported upload path.
 
 When the live guide exposes a target-bound world-asset upload, use it for lawful character avatars, faction flags, map backgrounds, and installed-app backgrounds. Match the same target during completion, pass the exact current world version, re-fetch after attachment, and record provenance or attribution where the destination schema supports it.
 
@@ -101,15 +101,15 @@ Use generic `i18n[locale]` overlays and stable IDs. Never create language-suffix
 
 ## Validate and write safely
 
-Call `validate_world_draft` on the complete candidate draft. Repair every error and assess every warning. Confirm app availability, action surfaces, exclusive-surface compatibility, runtime derivation, reference integrity, locale structure, map safety, and one authoritative owner for every durable fact. Independently audit every `{{...}}` token against `config.initFields` and the character roster; structural validation alone is not a rendered-preview test.
+Call `validate_world` on the complete candidate world. Repair every error and assess every warning. Confirm app availability, action surfaces, exclusive-surface compatibility, runtime derivation, reference integrity, locale structure, map safety, and one authoritative owner for every durable fact. Independently audit every `{{...}}` token against `config.initFields` and the character roster; structural validation alone is not a rendered-preview test.
 
-For a near-limit candidate, call the live payload-inspection tool before validation. When the live contract exposes bounded patch tools, use exact-version world patches for large app sections and validated map batches instead of repeatedly resending one multi-megabyte draft. Re-fetch after every batch; never leave an invalid partial map in the owned draft.
+For a near-limit candidate, call `inspect_world_payload` before validation. When the live contract exposes bounded patch tools, use exact-version world patches for large app sections and validated map batches instead of repeatedly resending one multi-megabyte world. Re-fetch after every batch; never leave an invalid partial map in the owned world.
 
-For a new draft, use a stable idempotency key tied to the Pax source version and adaptation revision. Reuse it only for an identical retry. After creation, call `get_world_summary` and verify the unpublished result.
+For a new world, use a stable idempotency key tied to the Pax source version and adaptation revision. Reuse it only for an identical retry. After creation, call `get_world_summary` and verify the unpublished result.
 
-For an update, call `get_owned_world`, preserve the complete latest draft, change only intended fields, validate the full candidate, and call `update_world_draft` with the exact current `updatedAt`. Re-fetch after success. On a version conflict, fetch, reapply, and revalidate instead of overwriting concurrent work.
+For an update, call `get_owned_world`, preserve the complete latest `world` payload, change only intended fields, validate the full candidate, and call `update_world` with the exact current `updatedAt`. Re-fetch after success. On a version conflict, fetch, reapply, and revalidate instead of overwriting concurrent work.
 
-Do not edit a resource owned by another account or mutate an immutable live release directly. An owned published world may be changed through its working draft and a later explicit release. Do not delete, transfer, or publish resources in this adaptation workflow. Do not mutate, repair, rewind, rename, or delete saves.
+Do not edit a resource owned by another account. An owned published world may be changed directly through the exact-versioned tools; the service preserves the outgoing immutable release and advances the live version. Do not delete, transfer, or publish resources in this adaptation workflow. Do not mutate, repair, rewind, rename, or delete saves.
 
 ## Review the adaptation
 
@@ -127,6 +127,6 @@ Use additional turns, up to the live limit, for a real chat-surface relationship
 
 When assertions and temporary turn history are available, attach assertions to each turn for the expected player-visible surface or content, then inspect the complete history before deletion. A failed assertion is a repair signal, not permission to reinterpret an unchanged surface as success.
 
-If the draft changes during repair, delete the version-bound session, fetch the new world version, and restart the playtest. If isolated playtest tools are unavailable, ask the user to start a fresh Simulation, then review it only through read-only save and turn tools. Never mutate a real save.
+If the world changes during repair, delete the version-bound session, fetch the new world version, and restart the playtest. If isolated playtest tools are unavailable, ask the user to start a fresh Simulation, then review it only through read-only save and turn tools. Never mutate a real save.
 
-Report the exact Pax source version, chosen adaptation form, preserve/rebuild/omit decisions, installed apps and state ownership, map gate outcome and asset choices, validation results, editor and preview URLs, preview and playtest scope, player-visible surfaces changed, and remaining human review. Call the result a structurally validated draft and explicitly state that runtime preview or playtesting remains unverified until each relevant check has actually passed. Never claim the Simulation is published unless the explicit live publishing workflow succeeded.
+Report the exact Pax source version, chosen adaptation form, preserve/rebuild/omit decisions, installed apps and state ownership, map gate outcome and asset choices, validation results, editor and preview URLs, preview and playtest scope, player-visible surfaces changed, and remaining human review. Call the result structurally validated and explicitly state that runtime preview or playtesting remains unverified until each relevant check has actually passed. Never claim the Simulation is published unless the explicit live publishing workflow succeeded.

@@ -25,7 +25,7 @@ Ask what the user wants to learn when it is not already clear. Common scopes inc
 - why a character failed to reply or behaved inconsistently;
 - whether time, travel, training, recovery, or deadlines advance credibly;
 - whether an app reflects the consequences described in prose;
-- whether a recent draft change improved new saves;
+- whether a recent world-version change improved new saves;
 - whether the world is too easy, too passive, or too noisy.
 
 Keep the review bounded to the question and relevant turns.
@@ -82,11 +82,11 @@ Classify findings before recommending action:
 
 Do not call something a platform bug when the evidence only shows a world-design or configuration issue.
 
-## Compare against the draft carefully
+## Compare against the current world carefully
 
-Existing saves are frozen snapshots. A current world draft can differ from the save that produced the run. If draft inspection is needed and authorized, use read-only world tools and state clearly which evidence comes from the save versus the current draft.
+Existing saves are frozen snapshots. The current world can differ from the version that produced the run. If current-world inspection is needed and authorized, use read-only world tools and state clearly which evidence comes from the save versus the current world version.
 
-Do not conclude that editing the current draft will repair an existing save. Draft changes generally apply to newly created saves.
+Do not conclude that editing the current world will repair an existing save. Direct world changes apply to new saves and to existing saves only after their player accepts the newer release.
 
 ## Report findings
 
@@ -96,14 +96,14 @@ Lead with the answer to the review question. For each material finding include:
 - player-visible symptom;
 - evidence by turn range or visible state section;
 - likely issue class;
-- recommended draft-level correction;
+- recommended world-level correction;
 - how to verify the correction in a new save.
 
 Separate confirmed evidence from inference. Keep quoted player or character prose short and only when necessary.
 
 ## No implicit fixes
 
-A review request does not authorize updating the world. Offer a draft-level fix plan. Use the world authoring workflow only if the user explicitly asks to apply changes, then fetch the latest owned draft and follow its versioned validation process.
+A review request does not authorize updating the world. Offer a proposed fix plan. Use the world authoring workflow only if the user explicitly asks to apply changes, then fetch the latest owned world and follow its exact-versioned validation process.
 
 ## Hard boundaries
 
@@ -111,4 +111,4 @@ A review request does not authorize updating the world. Offer a draft-level fix 
 - Never use another account’s save.
 - Never bypass response bounds or audit controls.
 - Never expose raw internal operations, paths, prompts, or credentials.
-- Never claim a current draft change modifies an existing save.
+- Never claim a current world change modifies an existing save before its player accepts the newer release.

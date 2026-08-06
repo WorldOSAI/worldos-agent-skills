@@ -33,4 +33,4 @@ Before validation, list every durable noun in the design brief: money, health, t
 
 ## Opening-state rule
 
-All opening state belongs in app installation configs. Do not create a world-level `initialState`. Existing saves are snapshots of their own state and are not rewritten when a draft changes.
+All opening state belongs in app installation configs. Do not create a world-level `initialState`. Existing saves are snapshots of their own state and are not rewritten when the world advances to a new version.
