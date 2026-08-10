@@ -12,10 +12,11 @@
     },
     {
       "title": "Specialists",
-      "description": "Focused workflows for maps, reusable widgets, and Simulation review.",
+      "description": "Focused workflows for maps, reusable widgets, controlled real play, and Simulation review.",
       "skills": [
         "worldos-map-authoring",
         "worldos-widget-authoring",
+        "worldos-simulation-play",
         "worldos-simulation-review"
       ]
     }
