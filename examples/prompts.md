@@ -46,6 +46,12 @@ Expected boundary: reuse wins. A private widget is created only after the catalo
 
 Expected boundary: save and turn access remains read-only. The agent reports behavioral findings without exposing system prompts, raw operations, or provider internals.
 
+## Run a real player-path regression
+
+> Create a fresh real save in my “Hogwarts” Simulation using the default setup. Name it “Character stats regression.” Use at most three turns to advance a character interaction, then verify that the character statistics change and remain updated after re-fetching the save. I understand that real turns may spend Zaps and contribute to normal counters and statistics. Do not modify the world.
+
+Expected boundary: explicit real-play consent authorizes one formal save and no more than three sequential turns. The agent uses a stable creation idempotency key, passes the exact latest save version to every turn, verifies only player-visible persisted results, and stops as soon as it has sufficient evidence. It does not delete or repair the real save, expose system internals, or treat an isolated creator playtest as equivalent evidence.
+
 ## Localize without language-specific fields
 
 > Create the canonical world copy in Japanese and add natural English and Simplified Chinese locale overlays. Keep IDs and template variables unchanged across locales. Do not introduce fields such as `titleEn` or `titleZh`.
