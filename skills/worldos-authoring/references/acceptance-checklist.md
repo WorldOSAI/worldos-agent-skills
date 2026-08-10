@@ -1,4 +1,4 @@
-# World acceptance checklist
+# World authoring acceptance checklist
 
 Use this checklist before creating or updating a world.
 
@@ -6,12 +6,11 @@ Use this checklist before creating or updating a world.
 
 - [ ] The user explicitly authorized the intended write.
 - [ ] The live authoring guide was read successfully.
-- [ ] The target is owned by the authorized account and is not blocked.
-- [ ] An update is based on the complete latest world and exact `updatedAt`.
-- [ ] For a published target, the user authorized the intended live-world change and understands that visibility remains public.
+- [ ] The target is owned by the authorized account; direct edits to a published world preserve public visibility and advance its immutable release version.
+- [ ] An update is based on the complete latest `world` payload and exact `updatedAt`.
 - [ ] A create uses a stable idempotency key; identical retries reuse it.
 - [ ] External sources have structured URL, version, retrieval, hash, license, and notes when the live contract supports provenance.
-- [ ] A near-limit draft was inspected before writing; bounded patches were re-fetched after each exact-version update.
+- [ ] A near-limit world was inspected with `inspect_world_payload`; bounded patches were re-fetched after each exact-version update.
 
 ## Playability
 
@@ -59,7 +58,7 @@ Use this checklist before creating or updating a world.
 
 ## Validation and handoff
 
-- [ ] `validate_world_draft` returned no errors.
+- [ ] `validate_world` returned no errors.
 - [ ] Every warning was fixed or consciously accepted.
 - [ ] The post-write world was fetched or summarized successfully.
 - [ ] Title, slug, visibility, apps, URLs, and latest version match the intended result.
@@ -68,18 +67,18 @@ Use this checklist before creating or updating a world.
 - [ ] The playtest covered representative ordinary, quiet, difficult, time, and core-state consequences in proportion to the change.
 - [ ] Each expected narrative consequence appeared on the corresponding player-visible app surface and persisted into later turns.
 - [ ] Available player-visible assertions passed and the complete temporary playtest history was inspected.
-- [ ] Every uploaded cover or world asset completed against the intended target and exact world version, then appeared in the re-fetched draft.
+- [ ] Every uploaded cover or world asset completed against the intended target and exact world version, then appeared in the re-fetched world.
 - [ ] The temporary playtest was deleted after review; real saves were never changed.
-- [ ] If no runtime preview or isolated/fresh-save playtest was possible, the handoff calls the result a structurally validated draft, labels runtime preview or playtesting as unverified, and does not call the Simulation finished.
-- [ ] The handoff reports fetched visibility accurately: an already public world remained public, while an unpublished world still requires human review and explicit publication.
+- [ ] If no runtime preview or isolated/fresh-save playtest was possible, the handoff calls the result structurally validated, labels runtime preview or playtesting as unverified, and does not call the Simulation finished.
+- [ ] A new unlisted world is reported as unpublished unless the explicit publishing workflow succeeded; a direct edit to an already-public world is reported as a live versioned update.
 
 ## Publishing only
 
 Use this section only when the user explicitly requested publication.
 
-- [ ] The exact target world and public visibility were explicitly confirmed by the user.
-- [ ] A stable HTTPS cover is attached; signed-upload completion succeeded when a cover was uploaded.
-- [ ] `validate_world_for_publish` returned `ready: true` with reviewer permission.
+- [ ] The exact target world and intended release visibility were explicitly confirmed by the user.
+- [ ] If a cover was requested, signed-upload completion succeeded and the stable HTTPS URL appears in the world; a missing optional cover warning was discussed rather than converted into a blocker.
+- [ ] `validate_world_for_publish` returned `ready: true` under the same ownership, moderation, subscription, and content rules as the editor.
 - [ ] The publish call uses the exact latest `updatedAt` and required literal confirmation.
-- [ ] The user was told that publication makes the world public and that later edits remain live, owner-scoped, validated, and exact-versioned.
+- [ ] The user was told that publication makes the world public, later direct edits preserve public visibility and advance its immutable version, and existing saves stay pinned until the player accepts an update.
 - [ ] The handoff reports publication only from a successful `publish_world` result and includes the public URL.

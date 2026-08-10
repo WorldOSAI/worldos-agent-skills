@@ -34,7 +34,7 @@ Large map payloads should prioritize playable geometry over coastline precision.
 
 ## Large strategic map budget
 
-Do not carry every source province into a global or continent-scale Simulation. Thousands of regions and highly detailed paths make the draft harder to inspect and can consume runtime context without adding meaningful choices. Aim for the smallest map that preserves the player's actual fronts, routes, supply decisions, and political distinctions.
+Do not carry every source province into a global or continent-scale Simulation. Thousands of regions and highly detailed paths make the world payload harder to inspect and can consume runtime context without adding meaningful choices. Aim for the smallest map that preserves the player's actual fronts, routes, supply decisions, and political distinctions.
 
 Vary resolution by strategic importance:
 

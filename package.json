@@ -1,7 +1,7 @@
 {
   "name": "worldos-agent-skills",
-  "version": "0.2.0",
-  "description": "Portable Agent Skills for creating AI-powered worlds through the WorldOS MCP.",
+  "version": "0.4.0",
+  "description": "Portable Agent Skills for building persistent AI world simulations with the WorldOS MCP.",
   "private": true,
   "type": "module",
   "license": "Apache-2.0",
@@ -15,8 +15,11 @@
     "agent-skills",
     "mcp",
     "ai-agents",
+    "ai-world-builder",
+    "ai-simulation",
     "world-building",
-    "simulation",
+    "world-simulation",
+    "no-code",
     "codex",
     "claude-code"
   ],

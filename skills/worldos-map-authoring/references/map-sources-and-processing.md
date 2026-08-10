@@ -47,4 +47,4 @@ Historical country datasets are usually too coarse to serve directly as strategi
 
 Project the normalized polygons into the map's declared `viewBox`, convert them to valid SVG paths, and preserve stable source identifiers separately from player-facing IDs. After merging or simplification, regenerate bounds, anchors, labels, and ownership references.
 
-Before writing the world draft, verify that every path parses, fits the view box, and resolves to one intended region and owner. Record the transformation summary and attribution in the handoff, and put attribution in `backgroundAttribution` or the closest field supported by the live app guide.
+Before writing the world, verify that every path parses, fits the view box, and resolves to one intended region and owner. Record the transformation summary and attribution in the handoff, and put attribution in `backgroundAttribution` or the closest field supported by the live app guide.
