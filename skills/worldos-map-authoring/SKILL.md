@@ -18,6 +18,8 @@ At the current contract, region maps and tile maps may both be authored from scr
 
 Read [references/map-quality.md](references/map-quality.md) before composing labels, markers, or a large set of regions. Read [references/map-sources-and-processing.md](references/map-sources-and-processing.md) before finding, downloading, or adapting external geometry.
 
+When the player controls a polity or faction and territorial war, fronts, diplomacy, logistics, or national survival drive the core loop, use the `worldos-war-authoring` workflow and live canonical template as well. This map skill defines geography and ownership; it does not replace world-level war adjudication rules.
+
 ## Choose a map branch
 
 ### No map needed

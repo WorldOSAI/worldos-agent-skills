@@ -26,6 +26,16 @@ Expected boundary: the agent identifies the owned source through the MCP and cre
 
 Expected boundary: the map skill follows the live region-map contract and uses optimistic concurrency when updating the world.
 
+## Create a grand-strategy war Simulation
+
+> Create an unpublished alternate-history WorldOS Simulation beginning in 1912. I control one Balkan state through diplomacy, mobilization, production, research, and military orders while every neighboring power acts independently. Use a strategic region map, realistic logistics, and coordinated multi-action turns when the live input guide supports them. Apply the canonical grand-strategy template, validate the complete world, and run an isolated playtest that includes preparation, an overambitious attack, waiting, and a direct diplomatic message. Do not publish it.
+
+Expected boundary: the war-authoring skill first reads the live canonical template and relevant app guides. It keeps era-specific scenario rules separate from the reusable template, treats player orders as attempts, uses map and input features only when their live guides support them, and deletes the temporary playtest after review.
+
+> Inspect the prompt bundle for the public remix-enabled world `ww2-1935` at its current release and explain which parts are canonical grand-strategy rules, scenario-specific rules, and app-level reminders. Do not create or update anything, and do not present the source prompt as player-facing copy.
+
+Expected boundary: the agent uses `get_remixable_world_prompt`, remains read-only, records the returned version and hash, and accepts a refusal if the source is no longer public and remix-enabled.
+
 ## Upload a cover and publish only on request
 
 > Upload this WebP image as the cover for my owned world, validate the complete Simulation for publishing, and summarize every remaining error or warning. Do not publish it yet.
