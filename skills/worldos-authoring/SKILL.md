@@ -20,6 +20,8 @@ Read the supporting material that matches the task:
 - For locale overlays and template variables, read [references/i18n-and-templates.md](references/i18n-and-templates.md).
 - Before any write, read [references/acceptance-checklist.md](references/acceptance-checklist.md).
 
+When the player controls a polity or faction and durable territorial war drives the core loop, use the `worldos-war-authoring` specialist workflow and its live canonical template. Do not infer that workflow merely from a war-themed setting.
+
 ## Respect write intent
 
 Read-only requests such as “review,” “audit,” “explain,” or “show me a proposal” do not authorize creation or updates. Stop after research, a candidate world payload, or validation.
@@ -119,7 +121,7 @@ Match the action surface to the turn structure. Keep single-action input when on
 
 Prefer existing apps. World-specific flavor belongs in each app installation config, including display copy, focused app instructions, and opening data. Do not create a widget merely to reproduce an existing app.
 
-If a required reusable interface does not exist, use the `worldos-widget-authoring` workflow if it is available. If the world needs a region map, use the `worldos-map-authoring` workflow before final validation.
+If a required reusable interface does not exist, use the `worldos-widget-authoring` workflow if it is available. If the world needs a region map, use the `worldos-map-authoring` workflow before final validation. If it is a polity-scale grand-strategy war world, use `worldos-war-authoring` before composing prompts or selecting the action surface.
 
 ## Separate world rules from app state
 

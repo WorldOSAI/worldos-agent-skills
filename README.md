@@ -48,6 +48,7 @@ The skill reads the live WorldOS authoring contract, discovers suitable apps, dr
 | Skill | Use it for |
 | --- | --- |
 | [`worldos-authoring`](skills/worldos-authoring/SKILL.md) | Design, validate, create, remix, update, cover, and explicitly publish owned WorldOS Simulations. Start here. |
+| [`worldos-war-authoring`](skills/worldos-war-authoring/SKILL.md) | Build polity-scale grand-strategy war Simulations from the live canonical rules, eligible source prompts, strategic maps, and isolated playtests. |
 | [`worldos-pax-adaptation`](skills/worldos-pax-adaptation/SKILL.md) | Adapt versioned Pax Historia worlds into playable unpublished WorldOS Simulations with explicit persistent state. |
 | [`worldos-map-authoring`](skills/worldos-map-authoring/SKILL.md) | Build, remix, and review region maps or tile maps with coherent geometry, terrain, ownership, labels, and markers. |
 | [`worldos-widget-authoring`](skills/worldos-widget-authoring/SKILL.md) | Create and update private reusable WorldOS UGC widgets when no existing app fits. |
@@ -85,7 +86,7 @@ npx skills add Story-Engine-Inc/worldos-agent-skills \
 
 Run `/mcp` in Claude Code to authenticate when prompted. Never paste an access token into a prompt or skill file.
 
-Install all six skills for every detected agent:
+Install all seven skills for every detected agent:
 
 ```bash
 npx skills add Story-Engine-Inc/worldos-agent-skills --all
@@ -127,6 +128,7 @@ This separation keeps the workflow portable across agents and resilient as the W
 ```text
 skills/
   worldos-authoring/
+  worldos-war-authoring/
   worldos-pax-adaptation/
   worldos-map-authoring/
   worldos-widget-authoring/
