@@ -43,6 +43,25 @@ Use the host-provided SDK rather than inventing storage or a transport layer:
 
 Use `sendAction` only for choices worth a turn. Use `engage` for passive micro-interactions. Keep payloads semantic and player-facing; do not expose raw state paths or operation grammar.
 
+## Localize the complete interface
+
+Every create or update candidate must implement all UI locales required by the live draft schema. Currently that means setting `langs` to exactly `en`, `es`, and `zh` and writing every visible interface string in one per-locale dictionary selected through `WS.locale`:
+
+```js
+const DICTS = {
+  en: { title: "Bounty Board", accept: "Accept", empty: "No bounties yet." },
+  es: { title: "Tablón de Encargos", accept: "Aceptar", empty: "Aún no hay encargos." },
+  zh: { title: "悬赏板", accept: "接受", empty: "暂无悬赏。" },
+};
+const L = DICTS[WS.locale] || DICTS.en;
+```
+
+Route headings, app and logo titles, `<title>`, buttons, labels, empty states, placeholders, select options, alerts, toasts, tooltips, `aria-label` and `alt` text, and visible fallback strings through that dictionary. Translate each locale naturally; do not copy one language into the other blocks. Real-world brand names may remain unchanged, but ordinary or fictional names should be localized naturally.
+
+Render content from `WS.state` as authored because the Simulation already supplies it in the player's language. Write display text in `defaultConfig` once, in one natural source language, and give every object in a localizable array a stable `id`; the platform adds data overlays when the app is installed in a world.
+
+`validate_app_draft` performs a model-backed visible-copy inspection in addition to structural checks. Treat `i18n_lint_unavailable` as a retryable validation failure, not permission to write. Repair every `unlocalized_ui_copy` result before create or update. App Market name, tagline, and description translations are generated and persisted automatically by the MCP write; do not invent a separate store-copy overlay in the draft.
+
 ## Respect the sandbox
 
 Treat the widget as a sandboxed opaque-origin iframe:
@@ -76,6 +95,8 @@ Make `configGuide` short and precise. It should explain the expected installatio
 
 Make `defaultConfig` small but renderable. It should demonstrate the generic structure without shipping a fictional world’s full content.
 
+Set `langs` to every locale required by the live schema and ensure the HTML actually implements each declared dictionary. A declaration without matching UI copy is invalid.
+
 ## Validate before writing
 
 Call `validate_app_draft` and repair every error. Review warnings about:
@@ -88,6 +109,8 @@ Call `validate_app_draft` and repair every error. Review warnings about:
 - mobile behavior;
 - oversized content;
 - incomplete metadata or configuration guidance.
+
+Also repair every multilingual error, including missing locale dictionaries, visible strings outside the dictionary, or an unavailable localization inspection. Do not downgrade an MCP-authored widget to a single-language draft.
 
 Do not create or update a widget that fails validation.
 
@@ -102,9 +125,10 @@ Use `create_app_draft` with a stable idempotency key. Reuse the key only to retr
 1. Use `list_owned_apps` when selection is needed.
 2. Call `get_owned_app` and retain the full draft and exact `updatedAt`.
 3. Preserve untouched fields while applying the intended change.
-4. Re-run `validate_app_draft` on the complete candidate.
-5. Call `update_app_draft` with the exact version.
-6. Fetch the app again and verify the new version.
+4. If the fetched legacy draft declares fewer than the required locales, add the missing dictionaries and replace `langs` with the complete current set.
+5. Re-run `validate_app_draft` on the complete candidate.
+6. Call `update_app_draft` with the exact version.
+7. Fetch the app again and verify the new version and locale declarations.
 
 On a stale version, refetch, reapply the intended change, revalidate, and submit again. Never overwrite concurrent changes blindly.
 
