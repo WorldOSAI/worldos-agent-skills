@@ -35,6 +35,16 @@
 - [ ] Images retain their aspect ratio.
 - [ ] The interface uses concise player-facing language.
 
+## Interface localization
+
+- [ ] `langs` contains every locale required by the live schema (`en`, `es`, and `zh` currently).
+- [ ] The HTML reads `WS.locale` and selects a complete per-locale UI dictionary.
+- [ ] Titles, controls, placeholders, options, states, notifications, accessibility text, and visible fallbacks all use the dictionary.
+- [ ] Each locale is written naturally rather than copying another locale's text.
+- [ ] Content from `WS.state` is rendered as supplied instead of being translated in the widget.
+- [ ] Localizable object arrays in `defaultConfig` use stable IDs.
+- [ ] `validate_app_draft` reports no `unlocalized_ui_copy` or `i18n_lint_unavailable` error.
+
 ## Configuration quality
 
 - [ ] `defaultConfig` is minimal and renderable.
