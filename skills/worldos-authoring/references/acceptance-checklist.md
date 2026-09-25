@@ -54,7 +54,8 @@ Use this checklist before creating or updating a world.
 ## Localization and player safety
 
 - [ ] Player-visible copy uses generic `i18n[locale]` overlays.
-- [ ] `get_owned_world.localizationStatus` reports the intended locales ready, no missing world/App fields, and `consistent: true`.
+- [ ] `get_owned_world.localizationStatus` reports the intended locales ready, no missing world/App fields, and `consistent: true`. A world below the translation threshold may intentionally stay single-language.
+- [ ] `request_world_localization` was used only for a world at or above the translation threshold, or an official world; below it, any extra locales were authored directly as `config.i18n[locale]` overlays.
 - [ ] A requested localization repair was polled to completion; a queued or retrying job was not reported as finished.
 - [ ] No new language-suffixed fields exist.
 - [ ] Localized arrays align by stable ID.
