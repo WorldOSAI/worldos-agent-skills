@@ -167,12 +167,12 @@ Use generic `i18n[locale]` overlays. Never invent fields such as `titleZh`, `nam
 
 The canonical language is not necessarily English. Treat each locale, including `en`, as eligible for an overlay. Preserve stable IDs so array elements can be matched across locales. Write native product copy for each locale rather than mirroring sentence structure mechanically.
 
-Automatic `en`/`es`/`zh` translation is earned, not immediate. WorldOS translates a world once its total play turns reach the site's translation threshold (currently 1000 turns). Until then the world is published in its canonical language only. An already-translated world keeps its overlays; edited fields fall back to canonical copy until the platform refills them.
+Automatic `en`/`es`/`zh` translation is earned, not immediate. WorldOS translates a world once its total play turns reach the site's translation threshold (currently 1000 turns). Until then the world is published in its canonical language only. Below the threshold, a write that changes canonical copy returns the world to single-language: every overlay is dropped, authored ones included, until the world earns translation.
 
 `get_owned_world.localizationStatus` is the readiness authority for authoring. It reports actual missing world fields and App fields per locale, the persisted `availableLocales`, and whether the two agree. Treat it according to where the world stands:
 
 - **At or above the threshold, or an official world:** when translations are incomplete or inconsistent, use `request_world_localization`; it queues a complete en/es/zh repair without publishing the world or changing its visibility. Re-fetch until every requested locale is ready and the status is consistent. Do not claim success merely because a localization job was queued.
-- **Below the threshold:** `request_world_localization` is refused. Leave the world single-language, or, when the creator needs other languages now, author the overlays directly in `config.i18n[locale]` and in each installed App's `config.i18n[locale]`. Authored overlays are preserved by later writes and automatic translation. Validate and verify them like any other copy change.
+- **Below the threshold:** `request_world_localization` is refused. Leave the world single-language, or, when the creator needs other languages now, author the overlays directly in `config.i18n[locale]` and in each installed App's `config.i18n[locale]`. Write them after the canonical copy is final: later writes that leave canonical copy unchanged keep them, but a canonical copy edit below the threshold drops them, so re-author them after such an edit. Validate and verify them like any other copy change.
 
 ## Validate, repair, then write
 

@@ -21,7 +21,7 @@ Do not treat `config.localization.readyLocales` as proof that translation exists
 Automatic `en`/`es`/`zh` translation is earned: WorldOS translates a world once its total play turns reach the site's translation threshold (currently 1000 turns). Below the threshold a world stays single-language, and missing overlays are expected rather than a defect.
 
 - **At or above the threshold, or an official world:** call `request_world_localization` with the exact world version and re-fetch until the repair completes. The request does not publish the world or change its visibility.
-- **Below the threshold:** `request_world_localization` is refused. If the creator needs other languages before then, write the overlays yourself in the world's `config.i18n[locale]` and in each installed App's `config.i18n[locale]`, following the rules above. Authored overlays are preserved by later writes and by automatic translation once the world qualifies.
+- **Below the threshold:** `request_world_localization` is refused. If the creator needs other languages before then, write the overlays yourself in the world's `config.i18n[locale]` and in each installed App's `config.i18n[locale]`, following the rules above. Write them once the canonical copy is final: a later canonical copy edit below the threshold drops every overlay (authored ones included), while writes that leave canonical copy unchanged keep them.
 
 ## Player variables
 
