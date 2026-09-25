@@ -66,7 +66,7 @@ Expected boundary: explicit real-play consent authorizes one formal save and no 
 
 > Create the canonical world copy in Japanese and add natural English and Simplified Chinese locale overlays. Keep IDs and template variables unchanged across locales. Do not introduce fields such as `titleEn` or `titleZh`.
 
-Expected boundary: all translations use generic `i18n[locale]` overlays and preserve structural identifiers.
+Expected boundary: all translations use generic `i18n[locale]` overlays and preserve structural identifiers. Because a newly created world is normally below the translation threshold, the agent writes these overlays itself in the world and installed-App `config.i18n[locale]` instead of calling `request_world_localization`, which is refused until the world earns automatic translation.
 
 ## Adapt a Pax Historia preset
 

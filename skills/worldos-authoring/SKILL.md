@@ -38,7 +38,7 @@ Compose the world payload manually when fidelity and deliberate mechanics matter
 
 1. Use `list_owned_worlds` if the user has not supplied an unambiguous world ID.
 2. Call `get_owned_world` and retain its complete `world` payload and exact `updatedAt`.
-3. Inspect the returned read-only `localizationStatus`. It audits actual world and installed-App overlay coverage; do not infer readiness from `config.localization` alone. If the user asked to repair missing translations, call `request_world_localization` with the exact `updatedAt`, then poll `get_owned_world` until the job completes or needs attention.
+3. Inspect the returned read-only `localizationStatus`. It audits actual world and installed-App overlay coverage; do not infer readiness from `config.localization` alone. Automatic translation is earned: a world below the translation threshold (total play turns, currently 1000) is expected to stay single-language, so missing overlays there are not a defect. If the user asked to repair missing translations on a world that has reached the threshold, or on an official world, call `request_world_localization` with the exact `updatedAt`, then poll `get_owned_world` until the job completes or needs attention. Below the threshold, write the requested overlays yourself instead (see [Localize as structured data](#localize-as-structured-data)).
 4. Modify only the intended fields while preserving every untouched world field and app installation config.
 5. Call `validate_world` on the complete candidate world.
 6. Call `patch_world` for bounded world-copy or app-install changes when the live contract exposes it; otherwise call `update_world` with the complete candidate. Pass the exact `updatedAt` as `expectedUpdatedAt` either way.
@@ -167,7 +167,12 @@ Use generic `i18n[locale]` overlays. Never invent fields such as `titleZh`, `nam
 
 The canonical language is not necessarily English. Treat each locale, including `en`, as eligible for an overlay. Preserve stable IDs so array elements can be matched across locales. Write native product copy for each locale rather than mirroring sentence structure mechanically.
 
-`get_owned_world.localizationStatus` is the readiness authority for authoring. It reports actual missing world fields and App fields per locale, the persisted `availableLocales`, and whether the two agree. When translations are incomplete or inconsistent, use `request_world_localization`; it queues a complete en/es/zh repair without publishing the world or changing its visibility. Re-fetch until every requested locale is ready and the status is consistent. Do not claim success merely because a localization job was queued.
+Automatic `en`/`es`/`zh` translation is earned, not immediate. WorldOS translates a world once its total play turns reach the site's translation threshold (currently 1000 turns). Until then the world is published in its canonical language only. Below the threshold, a write that changes canonical copy returns the world to single-language: every overlay is dropped, authored ones included, until the world earns translation.
+
+`get_owned_world.localizationStatus` is the readiness authority for authoring. It reports actual missing world fields and App fields per locale, the persisted `availableLocales`, and whether the two agree. Treat it according to where the world stands:
+
+- **At or above the threshold, or an official world:** when translations are incomplete or inconsistent, use `request_world_localization`; it queues a complete en/es/zh repair without publishing the world or changing its visibility. Re-fetch until every requested locale is ready and the status is consistent. Do not claim success merely because a localization job was queued.
+- **Below the threshold:** `request_world_localization` is refused. Leave the world single-language, or, when the creator needs other languages now, author the overlays directly in `config.i18n[locale]` and in each installed App's `config.i18n[locale]`. Write them after the canonical copy is final: later writes that leave canonical copy unchanged keep them, but a canonical copy edit below the threshold drops them, so re-author them after such an edit. Validate and verify them like any other copy change.
 
 ## Validate, repair, then write
 
