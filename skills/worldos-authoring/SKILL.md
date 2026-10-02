@@ -32,7 +32,7 @@ Call a write tool only when the user clearly asks to create, import, remix, modi
 
 ### New world
 
-Compose the world payload manually when fidelity and deliberate mechanics matter. Use `start_world_generation` only when the user accepts an AI-generated starting point, then poll `get_world_generation` until completion or failure. Treat generated output as editable candidate data, not an approved result.
+Compose the complete world payload yourself: the copy, the cast, the installed apps and every app's opening config. The MCP has no platform-side generation; you are the author. Validate the candidate with `validate_world` before `create_world`.
 
 ### Update an owned world
 
