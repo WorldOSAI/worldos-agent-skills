@@ -56,7 +56,7 @@ Do not preserve a passive encyclopedia opening. Convert routine travel, preparat
 
 ## Assign one owner to every durable fact
 
-Use `search_apps` for each required capability and call `get_app_guide` for every app under consideration. Search results and live guides, not remembered slugs or schemas, determine the installation plan.
+Use `search_apps` for each required capability and call `get_app_guide` for every app under consideration. The genre table in the `worldos-authoring` skill's official-apps reference lists likely candidates. For a Pax nation game where wars or territory drive the loop, apply `worldos-war-authoring` first; on top of it, `quests`, `achievements` and `theater` usually fit, plus `decisions` when the court files petitions and `dynasty` when succession matters (unseeded when the player may pick any realm). Search results and live guides, not remembered slugs or schemas, determine the installation plan.
 
 Assign each persistent fact that matters to the chosen loop to exactly one authoritative app. Typical responsibilities include Story for the current situation, Quests for staged objectives, Stats for abilities and conditions, Inventory for possessions, Wallet for money, Chats for reachable contacts, Time for elapsed time, Calendar for known appointments, and Map for geography and territorial control. Treat these as optional responsibilities, not a required bundle or guaranteed app names.
 

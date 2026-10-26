@@ -18,6 +18,7 @@ Read the supporting material that matches the task:
 - For gameplay and content design, read [references/world-design.md](references/world-design.md).
 - For deciding which app owns each persistent fact, read [references/state-ownership.md](references/state-ownership.md).
 - For locale overlays and template variables, read [references/i18n-and-templates.md](references/i18n-and-templates.md).
+- For which official apps usually carry each genre, read [references/official-apps.md](references/official-apps.md).
 - Before any write, read [references/acceptance-checklist.md](references/acceptance-checklist.md).
 
 When the player controls a polity or faction and durable territorial war drives the core loop, use the `worldos-war-authoring` specialist workflow and its live canonical template. Do not infer that workflow merely from a war-themed setting.
@@ -111,7 +112,7 @@ Prefer a small, coherent state model over many decorative panels. A persistent f
 
 ## Discover and understand apps
 
-1. Call `search_apps` with focused queries for the capabilities in the design brief. Search results, not memory, determine valid slugs.
+1. Check [references/official-apps.md](references/official-apps.md) for the official apps that usually carry this genre, then call `search_apps` with focused queries for the capabilities in the design brief. Search results, not memory, determine valid slugs.
 2. Call `get_app_guide` for every app under consideration.
 3. Read its current defaults, installation contract, type, and exclusivity constraints.
 4. When an official app satisfies a required capability, prefer it over a non-official app. Use a non-official app when no official app fits or the user explicitly requests it; do not install an irrelevant official app merely because it is official.
