@@ -36,6 +36,19 @@ Prefer a fresh, clearly named save for regression work. Do not experiment on a v
 
 Creation is complete only when the tool returns the owned save. A formal save cannot be deleted through this MCP workflow; tell the user it remains in their account and can be managed in the product.
 
+## Expand save capacity when authorized
+
+If creation reports `save_slots_full`, or the user asks to buy another slot:
+
+1. Confirm the live guide exposes `get_owned_save_capacity` and `purchase_owned_save_slot`. Reconnect only if the tool catalog is missing them.
+2. Call `get_owned_save_capacity` with the intended `worldKey` and locale. It reports used/total/available capacity, the price in Zaps, the balance, and `purchaseAuthorized`. World IDs and slugs resolve to their capacity key; shared-save keys resolve to the underlying world's capacity. A slot belongs to that world, not every Simulation.
+3. Purchase only within the user's explicit spending authorization. A request to play or create a save alone does not authorize buying capacity. If `purchaseAuthorized` is false, the user must reconnect and approve the updated slot-purchase permission. Never request tokens or bypass a refusal.
+4. Call `purchase_owned_save_slot` with a stable purchase `idempotencyKey` and an explicit `maxPriceZaps` within the user's budget. Each new key buys one slot. The server refuses a price above that maximum and never overdrafts for a slot purchase.
+5. If the outcome is uncertain, retry identical inputs with the SAME key. A successful retry returns the original receipt with `reused: true` and does not charge again. Never invent a new key to work around a timeout or an idempotency conflict. Insufficient-balance requests can retry the same inputs and key after the user tops up.
+6. Record the returned `chargedZaps`, `worldKey`, `slots`, and `reused`, then retry `create_owned_save` with its original creation key. Purchase and creation use separate keys. If creation fails, the purchased slot remains; do not buy again for that failure. Receipt capacity and balance are from purchase time; query capacity again when current values matter.
+
+Slot purchase does not buy Zaps or charge a payment method. Do not buy slots in a loop, exceed the user's spending budget, or treat purchase permission as an instruction to spend. Creation never automatically buys capacity.
+
 ## Play one turn at a time
 
 1. Select an interaction accepted by the live schema: main input, chat, map action, or a public `player_action` exposed by another surface. Use natural player interactions, never engine operations or state paths.
@@ -66,6 +79,7 @@ Report:
 - the Simulation and real save name, ID, and URL;
 - setup and player-visible actions used;
 - real turns consumed versus the authorized maximum;
+- any slot purchases and their returned charges (distinguish a reused receipt from a new charge);
 - the expected and observed player-visible result;
 - whether the result persisted after re-fetch;
 - pass, reproduced defect, or inconclusive status and any limitations;
