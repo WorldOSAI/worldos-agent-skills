@@ -55,22 +55,24 @@ When the widget needs player-visible world data, an installed official capabilit
 
 ## Localize the complete interface
 
-Every create or update candidate must implement all UI locales required by the live draft schema. Currently that means setting `langs` to exactly `en`, `es`, and `zh` and writing every visible interface string in one per-locale dictionary selected through `WS.locale`:
+Every create or update candidate must implement all UI locales required by the live draft schema. Currently that means setting `langs` to all five WorldOS locales — `en`, `zh`, `es`, `ja`, and `ko` — and writing every visible interface string in one per-locale dictionary selected through `WS.locale`. Write all five from the first draft: create and update refuse a widget that is missing any of them, so a three-language draft only costs a rejected round trip. The tool descriptions name the live locale set; follow them if it has grown.
 
 ```js
 const DICTS = {
   en: { title: "Bounty Board", accept: "Accept", empty: "No bounties yet." },
   es: { title: "Tablón de Encargos", accept: "Aceptar", empty: "Aún no hay encargos." },
   zh: { title: "悬赏板", accept: "接受", empty: "暂无悬赏。" },
+  ja: { title: "依頼掲示板", accept: "引き受ける", empty: "まだ依頼はありません。" },
+  ko: { title: "현상금 게시판", accept: "수락", empty: "아직 현상금 의뢰가 없어요." },
 };
 const L = DICTS[WS.locale] || DICTS.en;
 ```
 
 Route headings, app and logo titles, `<title>`, buttons, labels, empty states, placeholders, select options, alerts, toasts, tooltips, `aria-label` and `alt` text, and visible fallback strings through that dictionary. Translate each locale naturally; do not copy one language into the other blocks. Real-world brand names may remain unchanged, but ordinary or fictional names should be localized naturally.
 
-Render content from `WS.state` as authored because the Simulation already supplies it in the player's language. Write display text in `defaultConfig` once, in one natural source language, and give every object in a localizable array a stable `id`; the platform generates complete default-seed overlays before the public App is saved.
+Render content from `WS.state` as authored. The Simulation writes it, so make that possible in the player's language: in the App `prompt`, tell the Simulation to write every player-visible value (names of entries, notes, reports, statuses shown to the player) in the player's language, and keep the values the widget compares, groups or sorts by as language-neutral ids (`"status": "in_progress"`, `"group": "self.core"`) whose labels come from the dictionary. Never make the widget's logic depend on display text in one language — a widget that groups rows by Chinese prefixes forces the Simulation to keep writing Chinese for every player. Write display text in `defaultConfig` once, in one natural source language, and give every object in a localizable array a stable `id`; the platform generates complete default-seed overlays before the public App is saved.
 
-`validate_app_draft` performs a model-backed visible-copy inspection in addition to structural checks. Treat `i18n_lint_unavailable` as a retryable validation failure, not permission to write. Repair every `unlocalized_ui_copy` result before create or update. App Market name, tagline, and description translations are generated and persisted automatically by the MCP write; do not invent a separate store-copy overlay in the draft.
+`validate_app_draft` runs a deterministic multilingual inspection in addition to structural checks: every script must parse, each declared locale needs a dictionary block that mirrors `en`, and visible copy outside the dictionary is reported. Repair every `unlocalized_ui_copy` result before create or update. App Market name, tagline, and description translations are generated and persisted automatically by the MCP write; do not invent a separate store-copy overlay in the draft.
 
 ## Respect the sandbox
 
