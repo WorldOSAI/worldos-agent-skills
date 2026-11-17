@@ -46,13 +46,14 @@
 
 ## Interface localization
 
-- [ ] `langs` contains every locale required by the live schema (`en`, `es`, and `zh` currently).
+- [ ] `langs` contains every locale required by the live schema (all five currently: `en`, `zh`, `es`, `ja`, `ko`), and each has a complete dictionary block.
 - [ ] The HTML reads `WS.locale` and selects a complete per-locale UI dictionary.
 - [ ] Titles, controls, placeholders, options, states, notifications, accessibility text, and visible fallbacks all use the dictionary.
 - [ ] Each locale is written naturally rather than copying another locale's text.
 - [ ] Content from `WS.state` is rendered as supplied instead of being translated in the widget.
+- [ ] The App prompt asks the Simulation to write player-visible values in the player's language; values the widget compares or groups by are language-neutral ids, not display text.
 - [ ] Localizable object arrays in `defaultConfig` use stable IDs.
-- [ ] `validate_app_draft` reports no `unlocalized_ui_copy` or `i18n_lint_unavailable` error.
+- [ ] `validate_app_draft` reports no `unlocalized_ui_copy` or `script_syntax` error.
 
 ## Configuration quality
 
